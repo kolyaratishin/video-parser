@@ -46,7 +46,7 @@
             <td th:text="${video.views}"></td>
             <td th:text="${video.likes}"></td>
             <td th:text="${video.comments}"></td>
-            <<td><a th:text="${video.url}" th:href="${video.url}" target="_blank" rel="noopener noreferrer"></a></td>
+            <td><a th:text="${video.url}" th:href="${video.url}" target="_blank" rel="noopener noreferrer"></a></td>
             <td>
                 <form action="/delete" method="post" th:action="@{/delete(videoCode=${video.code})}">
                     <button type="submit" class="btn btn-danger">Видалити</button>

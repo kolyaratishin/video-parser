@@ -1,0 +1,13 @@
+com\video\parser\dto\RapidAPIMediaResponse.class
+com\video\parser\dto\InstagramMetrics.class
+com\video\parser\platform\PlatformClient.class
+com\video\parser\dto\VideoDetailsDto.class
+com\video\parser\controller\VideoController.class
+com\video\parser\dto\Platform.class
+com\video\parser\service\VideoService$1.class
+com\video\parser\platform\instagram\RapidAPIInstagramClient.class
+com\video\parser\VideoParserApplication.class
+com\video\parser\service\VideoService.class
+com\video\parser\dto\InstagramCaption.class
+com\video\parser\dto\RapidAPIMediaData.class
+com\video\parser\platform\instagram\InstagramMediaResponse.class
