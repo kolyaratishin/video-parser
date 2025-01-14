@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Копіюємо jar-файл у контейнер
-COPY COPY target/*.jar app.jar/
+COPY target/*.jar app.jar/
 
 # Відкриваємо порт (зазвичай 8080 для Spring Boot)
 EXPOSE 8080
