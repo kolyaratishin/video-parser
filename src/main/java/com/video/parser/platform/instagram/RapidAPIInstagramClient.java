@@ -33,7 +33,8 @@ public class RapidAPIInstagramClient implements PlatformClient {
     }
 
     @Override
-    public VideoDetailsDto getVideoDetails(String videoId) {
+    public VideoDetailsDto getVideoDetails(String url) {
+        String videoId = fetchVideoIdFromUrl(url);
         String apiUrl = "v1/post_info?code_or_id_or_url=" + videoId + "&include_insights=true";
 
         return webClient.get()
@@ -47,8 +48,22 @@ public class RapidAPIInstagramClient implements PlatformClient {
                         response.getData().getMetrics().getPlayCount(),
                         response.getData().getMetrics().getLikeCount(),
                         response.getData().getMetrics().getCommentCount(),
-                        Platform.INSTAGRAM
+                        Platform.INSTAGRAM,
+                        url
                 ))
                 .block();
+    }
+
+    private String fetchVideoIdFromUrl(String videoUrl) {
+        // Розбиваємо URL на частини
+        String[] parts = videoUrl.split("/");
+
+        // Знаходимо ID, який розташований після "instagram.com/p/"
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i].equals("p") && i + 1 < parts.length) {
+                return parts[i + 1]; // Наступна частина - це ID поста
+            }
+        }
+        throw new IllegalArgumentException("Unable to extract video ID from the URL");
     }
 }

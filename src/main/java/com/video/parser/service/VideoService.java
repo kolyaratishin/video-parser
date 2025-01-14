@@ -2,10 +2,8 @@ package com.video.parser.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.video.parser.dto.Platform;
 import com.video.parser.dto.VideoDetailsDto;
 import com.video.parser.platform.PlatformClient;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -53,7 +51,7 @@ public class VideoService {
         for (VideoDetailsDto video : videos) {
             try {
                 // Оновлюємо дані для кожного відео
-                VideoDetailsDto updatedVideo = fetchVideoDetailsByCode(video.getCode(), video.getPlatform());
+                VideoDetailsDto updatedVideo = fetchVideoDetailsByUrl(video.getUrl());
                 updatedVideos.add(updatedVideo);
             } catch (Exception e) {
                 System.err.println("Failed to update video: " + video.getCode() + ". Error: " + e.getMessage());
@@ -79,33 +77,11 @@ public class VideoService {
         }
     }
 
-    private VideoDetailsDto fetchVideoDetailsByCode(String code, Platform platform) {
-        return platformClients.stream()
-                .filter(client -> client.supports(platform))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unsupported platform"))
-                .getVideoDetails(code);
-    }
-
     private VideoDetailsDto fetchVideoDetailsByUrl(String url) {
-        String videoId = fetchVideoIdFromUrl(url);
         return platformClients.stream()
                 .filter(client -> client.supports(url))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported platform"))
-                .getVideoDetails(videoId);
-    }
-
-    private String fetchVideoIdFromUrl(String videoUrl) {
-        // Розбиваємо URL на частини
-        String[] parts = videoUrl.split("/");
-
-        // Знаходимо ID, який розташований після "instagram.com/p/"
-        for (int i = 0; i < parts.length; i++) {
-            if (parts[i].equals("p") && i + 1 < parts.length) {
-                return parts[i + 1]; // Наступна частина - це ID поста
-            }
-        }
-        throw new IllegalArgumentException("Unable to extract video ID from the URL");
+                .getVideoDetails(url);
     }
 }

@@ -7,15 +7,18 @@ public class VideoDetailsDto {
     private Long comments;
     private Platform platform;
 
+    private String url;
+
     public VideoDetailsDto() {
     }
 
-    public VideoDetailsDto(String code, Long views, Long likes, Long comments, Platform platform) {
+    public VideoDetailsDto(String code, Long views, Long likes, Long comments, Platform platform, String url) {
         this.code = code;
         this.views = views;
         this.likes = likes;
         this.comments = comments;
         this.platform = platform;
+        this.url = url;
     }
 
     public String getCode() {
@@ -56,6 +59,14 @@ public class VideoDetailsDto {
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
 
