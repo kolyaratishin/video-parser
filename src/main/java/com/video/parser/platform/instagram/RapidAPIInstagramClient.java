@@ -9,11 +9,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Arrays;
+import java.util.Set;
 
 @Component
 public class RapidAPIInstagramClient implements PlatformClient {
 
     private final WebClient webClient;
+
+    private final Set<String> allowedUri = Set.of("p", "reel");
 
     @Value("${rapidapi.key}")
     private String rapidApiKey;
@@ -58,9 +61,8 @@ public class RapidAPIInstagramClient implements PlatformClient {
         // Розбиваємо URL на частини
         String[] parts = videoUrl.split("/");
 
-        // Знаходимо ID, який розташований після "instagram.com/p/"
         for (int i = 0; i < parts.length; i++) {
-            if (parts[i].equals("p") && i + 1 < parts.length) {
+            if (allowedUri.contains(parts[i]) && i + 1 < parts.length) {
                 return parts[i + 1]; // Наступна частина - це ID поста
             }
         }

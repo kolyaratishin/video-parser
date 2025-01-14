@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -23,9 +24,11 @@ public class VideoService {
     }
 
     public void addVideo(String videoUrl) {
-        VideoDetailsDto videoDetails = fetchVideoDetailsByUrl(videoUrl);
         List<VideoDetailsDto> videos = getAllVideos();
-        videos.add(videoDetails);
+        Arrays.stream(videoUrl.split("\n")).forEach(url -> {
+            VideoDetailsDto videoDetails = fetchVideoDetailsByUrl(url);
+            videos.add(videoDetails);
+        });
         saveVideosToFile(videos);
     }
 
