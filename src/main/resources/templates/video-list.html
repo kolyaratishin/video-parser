@@ -26,9 +26,14 @@
 <!-- Контент сторінки -->
 <div class="container mt-5">
     <h1 class="mb-4">Список відео</h1>
-    <form action="/update" method="post" class="mb-3">
-        <button type="submit" class="btn btn-warning">Оновити дані</button>
-    </form>
+    <div class="d-flex justify-content-between">
+        <form action="/update" method="post" class="mb-3">
+            <button type="submit" class="btn btn-warning">Оновити дані</button>
+        </form>
+        <form action="/delete-all" method="post" class="mb-3">
+            <button type="submit" class="btn btn-danger">Видалити всі посилання</button>
+        </form>
+    </div>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
         <tr>

@@ -3,7 +3,6 @@
 <head>
     <title>Add Video</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <!-- Навігаційна панель -->
@@ -26,7 +25,7 @@
 <!-- Контент сторінки -->
 <div class="container mt-5">
     <h1 class="mb-4">Додати нове відео</h1>
-    <form action="/add" method="post" class="form-group">
+    <form id="addVideoForm" class="form-group">
         <div class="mb-3">
             <label for="videoUrl" class="form-label">Відео URL:</label>
             <textarea id="videoUrl" name="videoUrl" class="form-control" required></textarea>
@@ -34,5 +33,114 @@
         <button type="submit" class="btn btn-primary">Додати відео</button>
     </form>
 </div>
+
+<!-- Модальне вікно -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true"
+     th:class="${errors.size() > 0} ? 'modal fade show d-block' : 'modal fade'">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultModalLabel">Результати обробки</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModalBtn"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ці посилання не вдалося обробити:</p>
+                <ul>
+                    <li th:each="error : ${errors}" th:text="${error}"></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeFooterBtn">Закрити</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Обробка кнопки закриття в заголовку модалки
+        document.getElementById('closeModalBtn').addEventListener('click', clearErrors);
+
+        // Обробка кнопки закриття у футері модалки
+        document.getElementById('closeFooterBtn').addEventListener('click', clearErrors);
+
+        // Функція для очищення помилок через AJAX
+        function clearErrors() {
+            fetch('/clear-error-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Errors cleared successfully');
+                    window.location.reload();
+                } else {
+                    console.error('Failed to clear errors');
+                }
+            })
+            .catch(error => {
+                console.error('Error during AJAX request:', error);
+            });
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('addVideoForm');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Запобігаємо стандартній поведінці форми
+
+            // Отримуємо дані з textarea
+            const videoUrl = document.getElementById('videoUrl').value;
+            // Надсилаємо AJAX-запит на сервер
+            fetch('/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ videoUrl: videoUrl })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Очищення поля textarea
+                document.getElementById('videoUrl').value = '';
+
+                // Показуємо модальне вікно з результатами
+                if (data.errors && data.errors.length > 0) {
+                   showModal(data.errors, "Ці повідомлення не були оброблені");
+                } else {
+                    showModal([], "Всі посилання були успішно оброблені!");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+
+        // Функція для показу модального вікна
+        function showModal(messages, firstParagraphText) {
+            const modalBody = document.querySelector('#resultModal .modal-body');
+            modalBody.innerHTML = '';
+            document.createElement('p')
+            const firstParagraph = document.createElement('p');
+            firstParagraph.textContent = firstParagraphText;
+            modalBody.appendChild(firstParagraph);
+            messages.forEach(message => {
+                const paragraph = document.createElement('p');
+                paragraph.textContent = message;
+                modalBody.appendChild(paragraph);
+            });
+
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

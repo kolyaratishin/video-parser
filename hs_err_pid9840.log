@@ -1,0 +1,241 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 264241152 bytes. Error detail: G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3614), pid=9840, tid=12880
+#
+# JRE version:  (17.0.13+11) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.13+11-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:53752,suspend=y,server=n -javaagent:C:\Users\Mykola\AppData\Local\JetBrains\IdeaIC2022.1\captureAgent\debugger-agent.jar=file:/C:/Users/Mykola/AppData/Local/Temp/capture.props -Dfile.encoding=UTF-8 com.video.parser.VideoParserApplication
+
+Host: 12th Gen Intel(R) Core(TM) i5-12450H, 12 cores, 15G,  Windows 10 , 64 bit Build 19041 (10.0.19041.5198)
+Time: Thu Jan 16 13:00:40 2025  Windows 10 , 64 bit Build 19041 (10.0.19041.5198) elapsed time: 0.015736 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001bfd04967c0):  JavaThread "Unknown thread" [_thread_in_vm, id=12880, stack(0x000000831c200000,0x000000831c300000)]
+
+Stack: [0x000000831c200000,0x000000831c300000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x680c19]
+V  [jvm.dll+0x83888a]
+V  [jvm.dll+0x83a34e]
+V  [jvm.dll+0x83a9b3]
+V  [jvm.dll+0x2481af]
+V  [jvm.dll+0x67d959]
+V  [jvm.dll+0x67242a]
+V  [jvm.dll+0x30813b]
+V  [jvm.dll+0x30f626]
+V  [jvm.dll+0x35f94e]
+V  [jvm.dll+0x35fb8f]
+V  [jvm.dll+0x2df0ec]
+V  [jvm.dll+0x2e0044]
+V  [jvm.dll+0x80a04b]
+V  [jvm.dll+0x36d6c1]
+V  [jvm.dll+0x7e8975]
+V  [jvm.dll+0x3f109f]
+V  [jvm.dll+0x3f2c11]
+C  [jli.dll+0x52ab]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17374]
+C  [ntdll.dll+0x4cc91]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffe5e808f58, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x000001bfd0502a50 GCTaskThread "GC Thread#0" [stack: 0x000000831c300000,0x000000831c400000] [id=1644]
+  0x000001bfd0513550 ConcurrentGCThread "G1 Main Marker" [stack: 0x000000831c400000,0x000000831c500000] [id=26544]
+  0x000001bfd05149f0 ConcurrentGCThread "G1 Conc#0" [stack: 0x000000831c500000,0x000000831c600000] [id=13096]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe5dfbf827]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000001bfd0492260] Heap_lock - owner thread: 0x000001bfd04967c0
+
+Heap address: 0x0000000704a00000, size: 4022 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000704a00000, 0x0000000800000000)
+  region size 2048K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe5e3a9e69]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (2 events):
+Event: 0.009 Loaded shared library C:\Users\Mykola\.jdks\corretto-17.0.13\bin\java.dll
+Event: 0.011 Loaded shared library C:\Users\Mykola\.jdks\corretto-17.0.13\bin\zip.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff773dd0000 - 0x00007ff773dde000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\java.exe
+0x00007ffeba490000 - 0x00007ffeba688000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffeb85e0000 - 0x00007ffeb86a2000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffeb7cd0000 - 0x00007ffeb7fce000 	C:\Windows\System32\KERNELBASE.dll
+0x0000000056930000 - 0x0000000056c62000 	C:\Program Files\Norton Security\NortonData\22.23.10.10\Definitions\IPSDefs\20240809.064\IPSEng64.dll
+0x00007ffeb8af0000 - 0x00007ffeb8ba1000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffeb94d0000 - 0x00007ffeb956e000 	C:\Windows\System32\msvcrt.dll
+0x00007ffeb8760000 - 0x00007ffeb87ff000 	C:\Windows\System32\sechost.dll
+0x00007ffeb84b0000 - 0x00007ffeb85d3000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffeb8290000 - 0x00007ffeb82b7000 	C:\Windows\System32\bcrypt.dll
+0x00007ffeb90e0000 - 0x00007ffeb90e8000 	C:\Windows\System32\PSAPI.DLL
+0x00007ffeb8000000 - 0x00007ffeb8100000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffe9bcd0000 - 0x00007ffe9bce7000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\jli.dll
+0x00007ffe9cfe0000 - 0x00007ffe9cffb000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\VCRUNTIME140.dll
+0x00007ffeb9ce0000 - 0x00007ffeb9e7d000 	C:\Windows\System32\USER32.dll
+0x00007ffeb7fd0000 - 0x00007ffeb7ff2000 	C:\Windows\System32\win32u.dll
+0x00007ffeb7150000 - 0x00007ffeb73ea000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16\COMCTL32.dll
+0x00007ffeb8c20000 - 0x00007ffeb8c4b000 	C:\Windows\System32\GDI32.dll
+0x00007ffeb8170000 - 0x00007ffeb8287000 	C:\Windows\System32\gdi32full.dll
+0x00007ffeb7b80000 - 0x00007ffeb7c1d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffeba340000 - 0x00007ffeba36f000 	C:\Windows\System32\IMM32.DLL
+0x00007ffeaa6d0000 - 0x00007ffeaa6dc000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\vcruntime140_1.dll
+0x00007ffe831e0000 - 0x00007ffe8326d000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\msvcp140.dll
+0x00007ffe5dcd0000 - 0x00007ffe5e93c000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\server\jvm.dll
+0x00007ffeb8bb0000 - 0x00007ffeb8c1b000 	C:\Windows\System32\WS2_32.dll
+0x00007ffeb7990000 - 0x00007ffeb79db000 	C:\Windows\SYSTEM32\POWRPROF.dll
+0x00007ffeae1e0000 - 0x00007ffeae1ea000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffeaa760000 - 0x00007ffeaa787000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ffeb7970000 - 0x00007ffeb7982000 	C:\Windows\SYSTEM32\UMPDC.dll
+0x00007ffeb5510000 - 0x00007ffeb5522000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ffe9dbd0000 - 0x00007ffe9dbda000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\jimage.dll
+0x00007ffeb7430000 - 0x00007ffeb7614000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ffeb73f0000 - 0x00007ffeb7424000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ffeb8420000 - 0x00007ffeb84a2000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ffeaa6f0000 - 0x00007ffeaa72b000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\jdwp.dll
+0x00007ffeaeca0000 - 0x00007ffeaecae000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\instrument.dll
+0x00007ffe96570000 - 0x00007ffe96595000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\java.dll
+0x00007ffe8a3e0000 - 0x00007ffe8a3f8000 	C:\Users\Mykola\.jdks\corretto-17.0.13\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Users\Mykola\.jdks\corretto-17.0.13\bin;C:\Windows\SYSTEM32;C:\Program Files\Norton Security\NortonData\22.23.10.10\Definitions\IPSDefs\20240809.064;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.4355_none_60b8b9eb71f62e16;C:\Users\Mykola\.jdks\corretto-17.0.13\bin\server
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:53752,suspend=y,server=n -javaagent:C:\Users\Mykola\AppData\Local\JetBrains\IdeaIC2022.1\captureAgent\debugger-agent.jar=file:/C:/Users/Mykola/AppData/Local/Temp/capture.props -Dfile.encoding=UTF-8 
+java_command: com.video.parser.VideoParserApplication
+java_class_path (initial): D:\Video-parser\target\classes;C:\Users\Mykola\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.4.1\spring-boot-starter-web-3.4.1.jar;C:\Users\Mykola\.m2\repository\org\springframework\boot\spring-boot-starter\3.4.1\spring-boot-starter-3.4.1.jar;C:\Users\Mykola\.m2\repository\org\springframework\boot\spring-boot\3.4.1\spring-boot-3.4.1.jar;C:\Users\Mykola\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.4.1\spring-boot-autoconfigure-3.4.1.jar;C:\Users\Mykola\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.4.1\spring-boot-starter-logging-3.4.1.jar;C:\Users\Mykola\.m2\repository\ch\qos\logback\logback-classic\1.5.12\logback-classic-1.5.12.jar;C:\Users\Mykola\.m2\repository\ch\qos\logback\logback-core\1.5.12\logback-core-1.5.12.jar;C:\Users\Mykola\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\Mykola\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\Mykola\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar;C:\Users\Mykola\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\Mykola\.m2\repository\org\yaml\snakeyaml\2.3\snakeyaml-2.3.jar;C:\Users\Mykola\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.4.1\spring-boot-starter-json-3.4.1.jar;C:\Users\Mykola\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.18.2\jackson-databind-2.18.2.jar;C:\Users\Mykola\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.18.2\jackson-annotations-2.18.2.jar;C:\Users\Mykola\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.18.2\jackson-core-2.18.2.jar;C:\Users\Mykola\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.18.2\jackson-datatype-jdk8-2.18.2.jar;C:\Users\Mykola\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.18.2\jackson-datatype-jsr310-2.18.2.jar;C:\Us
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 264241152                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4217372672                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4217372672                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-17
+PATH=C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Git\cmd;D:\Python\Scripts\;D:\Python\;C:\Users\Mykola\AppData\Local\Microsoft\WindowsApps;C:\Users\Mykola\AppData\Roaming\npm;C:\Users\Mykola\.dotnet\tools;D:\IntelliJ IDEA 2024.2.4\bin;;D:\універ\диплом;C:\Users\Mykola\AppData\Local\Programs\Microsoft VS Code\bin;D:\IntelliJ IDEA Community Edition 2022.1.3\bin;
+USERNAME=Mykola
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+TMP=C:\Users\Mykola\AppData\Local\Temp
+TEMP=C:\Users\Mykola\AppData\Local\Temp
+
+
+
+Periodic native trim disabled
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 10 , 64 bit Build 19041 (10.0.19041.5198)
+OS uptime: 2 days 13:28 hours
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 154 stepping 3 microcode 0x424, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, sha, fma, vzeroupper, clflush, clflushopt, clwb
+Processor Information for all 12 processors :
+  Max Mhz: 2000, Current Mhz: 2000, Mhz Limit: 2000
+
+Memory: 4k page, system-wide physical 16085M (819M free)
+TotalPageFile size 28570M (AvailPageFile size 92M)
+current process WorkingSet (physical memory assigned to process): 12M, peak: 12M
+current process commit charge ("private bytes"): 65M, peak: 317M
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.13+11-LTS) for windows-amd64 JRE (17.0.13+11-LTS), built on Oct 10 2024 19:51:30 by "Administrator" with MS VC++ 16.10 / 16.11 (VS2019)
+
+END.

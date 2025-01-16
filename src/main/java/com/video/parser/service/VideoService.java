@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.video.parser.dto.VideoDetailsDto;
 import com.video.parser.platform.PlatformClient;
+import com.video.parser.platform.instagram.InstagramApiErrorMessageHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -27,7 +28,10 @@ public class VideoService {
         List<VideoDetailsDto> videos = getAllVideos();
         Arrays.stream(videoUrl.split("\n")).forEach(url -> {
             VideoDetailsDto videoDetails = fetchVideoDetailsByUrl(url);
-            videos.add(videoDetails);
+            if (videoDetails != null){
+                videos.add(videoDetails);
+            }
+
         });
         saveVideosToFile(videos);
     }
@@ -71,6 +75,12 @@ public class VideoService {
         saveVideosToFile(videos);
     }
 
+    public void deleteAllVideos() {
+        List<VideoDetailsDto> videos = getAllVideos();
+        videos.clear();
+        saveVideosToFile(videos);
+    }
+
     // Зберегти всі відео у файл
     private void saveVideosToFile(List<VideoDetailsDto> videos) {
         try {
@@ -81,6 +91,7 @@ public class VideoService {
     }
 
     private VideoDetailsDto fetchVideoDetailsByUrl(String url) {
+        InstagramApiErrorMessageHolder.clear();
         return platformClients.stream()
                 .filter(client -> client.supports(url))
                 .findFirst()

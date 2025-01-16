@@ -7,6 +7,7 @@ import com.video.parser.platform.PlatformClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -38,23 +39,33 @@ public class RapidAPIInstagramClient implements PlatformClient {
     @Override
     public VideoDetailsDto getVideoDetails(String url) {
         String videoId = fetchVideoIdFromUrl(url);
-        String apiUrl = "v1/post_info?code_or_id_or_url=" + videoId + "&include_insights=true";
+        System.out.println("Calling Instagram API to get video info for videoId: " + videoId);
+        return getVideoDetailsDto(url, videoId);
+    }
 
-        return webClient.get()
-                .uri(apiUrl)
-                .header("x-rapidapi-host", "instagram-scraper-api2.p.rapidapi.com")
-                .header("x-rapidapi-key", rapidApiKey)
-                .retrieve()
-                .bodyToMono(RapidAPIMediaResponse.class)
-                .map(response -> new VideoDetailsDto(
-                        response.getData().getCode(),
-                        response.getData().getMetrics().getPlayCount(),
-                        response.getData().getMetrics().getLikeCount(),
-                        response.getData().getMetrics().getCommentCount(),
-                        Platform.INSTAGRAM,
-                        url
-                ))
-                .block();
+    private VideoDetailsDto getVideoDetailsDto(String url, String videoId) {
+        String apiUrl = "v1/post_info?code_or_id_or_url=" + videoId + "&include_insights=true";
+        try {
+            return webClient.get()
+                    .uri(apiUrl)
+                    .header("x-rapidapi-host", "instagram-scraper-api2.p.rapidapi.com")
+                    .header("x-rapidapi-key", rapidApiKey)
+                    .retrieve()
+                    .bodyToMono(RapidAPIMediaResponse.class)
+                    .map(response -> new VideoDetailsDto(
+                            response.getData().getCode(),
+                            response.getData().getMetrics().getPlayCount(),
+                            response.getData().getMetrics().getLikeCount(),
+                            response.getData().getMetrics().getCommentCount(),
+                            Platform.INSTAGRAM,
+                            url
+                    ))
+                    .block();
+        } catch (WebClientResponseException e) {
+            System.out.println("Error occurred while calling video info API for video id: " + videoId);
+            InstagramApiErrorMessageHolder.addError(url);
+            return null;
+        }
     }
 
     private String fetchVideoIdFromUrl(String videoUrl) {

@@ -1,10 +1,12 @@
 D:\Video-parser\src\main\java\com\video\parser\controller\VideoController.java
+D:\Video-parser\src\main\java\com\video\parser\dto\AddVideoRequest.java
 D:\Video-parser\src\main\java\com\video\parser\dto\InstagramCaption.java
 D:\Video-parser\src\main\java\com\video\parser\dto\InstagramMetrics.java
 D:\Video-parser\src\main\java\com\video\parser\dto\Platform.java
 D:\Video-parser\src\main\java\com\video\parser\dto\RapidAPIMediaData.java
 D:\Video-parser\src\main\java\com\video\parser\dto\RapidAPIMediaResponse.java
 D:\Video-parser\src\main\java\com\video\parser\dto\VideoDetailsDto.java
+D:\Video-parser\src\main\java\com\video\parser\platform\instagram\InstagramApiErrorMessageHolder.java
 D:\Video-parser\src\main\java\com\video\parser\platform\instagram\InstagramMediaResponse.java
 D:\Video-parser\src\main\java\com\video\parser\platform\instagram\RapidAPIInstagramClient.java
 D:\Video-parser\src\main\java\com\video\parser\platform\PlatformClient.java
