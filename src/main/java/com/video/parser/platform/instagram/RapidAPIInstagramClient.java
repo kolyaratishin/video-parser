@@ -17,13 +17,13 @@ public class RapidAPIInstagramClient implements PlatformClient {
 
     private final WebClient webClient;
 
-    private final Set<String> allowedUri = Set.of("p", "reel");
+    private final Set<String> allowedUri = Set.of("p", "reels");
 
     @Value("${rapidapi.key}")
     private String rapidApiKey;
 
     public RapidAPIInstagramClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://instagram-scraper-api2.p.rapidapi.com").build();
+        this.webClient = webClientBuilder.baseUrl("https://mediafy-api.p.rapidapi.com").build();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class RapidAPIInstagramClient implements PlatformClient {
         try {
             return webClient.get()
                     .uri(apiUrl)
-                    .header("x-rapidapi-host", "instagram-scraper-api2.p.rapidapi.com")
+                    .header("x-rapidapi-host", "mediafy-api.p.rapidapi.com")
                     .header("x-rapidapi-key", rapidApiKey)
                     .retrieve()
                     .bodyToMono(RapidAPIMediaResponse.class)
