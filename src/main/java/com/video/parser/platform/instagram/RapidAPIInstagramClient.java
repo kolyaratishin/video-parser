@@ -17,7 +17,7 @@ public class RapidAPIInstagramClient implements PlatformClient {
 
     private final WebClient webClient;
 
-    private final Set<String> allowedUri = Set.of("p", "reel", "reels");
+    private final Set<String> allowedUri = Set.of("p", "reel", "reels", "share");
 
     @Value("${rapidapi.key}")
     private String rapidApiKey;
