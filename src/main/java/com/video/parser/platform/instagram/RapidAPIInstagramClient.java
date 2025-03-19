@@ -17,7 +17,7 @@ public class RapidAPIInstagramClient implements PlatformClient {
 
     private final WebClient webClient;
 
-    private final Set<String> allowedUri = Set.of("p", "reels");
+    private final Set<String> allowedUri = Set.of("p", "reel", "reels");
 
     @Value("${rapidapi.key}")
     private String rapidApiKey;
@@ -77,6 +77,6 @@ public class RapidAPIInstagramClient implements PlatformClient {
                 return parts[i + 1]; // Наступна частина - це ID поста
             }
         }
-        throw new IllegalArgumentException("Unable to extract video ID from the URL");
+        throw new IllegalArgumentException("Unable to extract video ID from the URL: " + videoUrl);
     }
 }
